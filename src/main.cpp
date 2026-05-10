@@ -17,6 +17,7 @@
 #include <fstream>
 #include <vector>
 #include <limits>
+#include <filesystem>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ const double ROOM_PRICE_3_PERSON    = 14500.0;
 const double ROOM_PRICE_4_PERSON    = 12500.0;
 
 // ============================================================
-// UTILITY — Input helpers to prevent crashes on bad input
+// UTILITY - Input helpers to prevent crashes on bad input
 // ============================================================
 
 // Reads a valid integer from the user; keeps asking on bad input
@@ -197,13 +198,13 @@ protected:
 public:
     Hostel(const string& name, const string& file, const string& roomPrefix)
         : hostelName(name), dataFile(file) {
-        // Create MAX_ROOMS rooms with the given prefix (B1–B200 or G1–G200)
+        // Create MAX_ROOMS rooms with the given prefix (B1-B200 or G1-G200)
         for (int i = 1; i <= MAX_ROOMS; ++i) {
             rooms.emplace_back(roomPrefix + to_string(i));
         }
     }
 
-    // Pure virtual — each hostel type provides its own list
+    // Pure virtual - each hostel type provides its own list
     virtual void displayFacilities() const = 0;
     virtual void displayRules()      const = 0;
 
@@ -267,13 +268,15 @@ public:
 
     // Appends all residents to the data file (overwrites for full refresh)
     void saveToFile() const {
+        // Create data directory if it doesn't exist (handled in main)
         ofstream outFile("data/" + dataFile);
         if (!outFile.is_open()) {
-            cout << "Error: Could not open file '" << dataFile << "' for saving.\n";
+            cout << "Error: Could not open file 'data/" << dataFile << "' for saving.\n";
+            cout << "Please make sure the 'data' folder exists.\n";
             return;
         }
 
-        outFile << hostelName << " — Resident Records\n";
+        outFile << hostelName << " - Resident Records\n";
         outFile << string(40, '=') << "\n";
 
         for (const auto& resident : residents) {
@@ -381,7 +384,7 @@ class Payment {
 public:
     const T registrationFee = static_cast<T>(REGISTRATION_FEE);
 
-    // Returns room price based on selected room type (1–4 occupants)
+    // Returns room price based on selected room type (1-4 occupants)
     T getRoomPrice(int roomType) const {
         switch (roomType) {
             case 1: return static_cast<T>(ROOM_PRICE_1_PERSON);
@@ -441,7 +444,7 @@ void printReceipt(const Resident& resident, const string& roomNumber,
     cout << "Room Fee:            PKR " << roomFee           << "\n";
     cout << "Total Paid:          PKR " << (regFee + roomFee) << "\n";
     cout << string(40, '=') << "\n";
-    cout << "Registration complete! Welcome to CUST Residencia.\n\n";
+    cout << "Registration complete! Welcome to Hostel Management System.\n\n";
 }
 
 // ============================================================
@@ -502,10 +505,10 @@ void registerResident(Hostel& hostel) {
     if (!payment.processRegistrationPayment()) return;
 
     cout << "\n--- Select Room Type ---\n"
-         << "1. Single Room  — PKR 18,000/month\n"
-         << "2. Double Room  — PKR 16,000/month\n"
-         << "3. Triple Room  — PKR 14,500/month\n"
-         << "4. Quad Room    — PKR 12,500/month\n";
+         << "1. Single Room  - PKR 18,000/month\n"
+         << "2. Double Room  - PKR 16,000/month\n"
+         << "3. Triple Room  - PKR 14,500/month\n"
+         << "4. Quad Room    - PKR 12,500/month\n";
 
     int roomType = readInt("Enter room type (1-4): ");
     double roomPrice = payment.getRoomPrice(roomType);
@@ -517,7 +520,7 @@ void registerResident(Hostel& hostel) {
 
     if (!payment.processRoomPayment(roomPrice)) return;
 
-    // All payments successful — assign room and save
+    // All payments successful - assign room and save
     resident.setRoomNumber(room->getRoomNumber());
     room->markOccupied();
     hostel.addResident(resident);
@@ -581,7 +584,7 @@ void hostelAdminMenu(Hostel& hostel, const string& label) {
 
 // ============================================================
 // FUNCTION: adminMenu
-// Top-level admin menu — choose boys or girls hostel
+// Top-level admin menu - choose boys or girls hostel
 // ============================================================
 
 void adminMenu(BoysHostel& boysHostel, GirlsHostel& girlsHostel) {
@@ -605,13 +608,28 @@ void adminMenu(BoysHostel& boysHostel, GirlsHostel& girlsHostel) {
 }
 
 // ============================================================
+// FUNCTION: createDataDirectory
+// Creates the data directory if it doesn't exist
+// ============================================================
+
+void createDataDirectory() {
+    try {
+        if (!std::filesystem::exists("data")) {
+            std::filesystem::create_directory("data");
+        }
+    } catch (const std::exception& e) {
+        cout << "Note: Could not create data directory: " << e.what() << "\n";
+    }
+}
+
+// ============================================================
 // FUNCTION: main
-// Entry point — displays main menu and routes to actions
+// Entry point - displays main menu and routes to actions
 // ============================================================
 
 int main() {
-    // Create data directory if it doesn't exist (platform-safe attempt)
-    system("mkdir -p data 2>/dev/null || mkdir data 2>nul");
+    // Create data directory if it doesn't exist
+    createDataDirectory();
 
     BoysHostel  boysHostel("Boys Hostel");
     GirlsHostel girlsHostel("Girls Hostel");
@@ -621,8 +639,8 @@ int main() {
         cout << "\n" << string(30, '=') << "\n";
         cout << "   Hostel Management System\n";
         cout << string(30, '=') << "\n";
-        cout << "1. Register — Boys Hostel\n";
-        cout << "2. Register — Girls Hostel\n";
+        cout << "1. Register - Boys Hostel\n";
+        cout << "2. Register - Girls Hostel\n";
         cout << "3. View Hostel Facilities\n";
         cout << "4. Rules & Restrictions\n";
         cout << "5. Admin Login\n";
@@ -664,7 +682,7 @@ int main() {
                 break;
 
             case 'q':
-                cout << "Thank you for using CUST Residencia. Goodbye!\n";
+                cout << "Thank you for using Hostel Management System. Goodbye!\n";
                 break;
 
             default:
