@@ -1,0 +1,32 @@
+# Compiled binaries
+hostel_management
+hostel_management.exe
+*.o
+*.obj
+*.out
+
+# Data files (generated at runtime — don't commit test data)
+data/*.txt
+
+# IDE files
+.vscode/
+.idea/
+*.vcxproj
+*.vcxproj.filters
+*.sln
+*.suo
+*.user
+*.ncb
+*.sdf
+*.opensdf
+*.ipch
+x64/
+x86/
+Debug/
+Release/
+ipch/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
