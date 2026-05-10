@@ -1,4 +1,4 @@
-# 🏨 CUST Residencia — Hostel Management System
+# 🏨 Hostel Management System
 
 ![C++](https://img.shields.io/badge/Language-C%2B%2B17-blue?style=flat&logo=c%2B%2B)
 ![OOP](https://img.shields.io/badge/Paradigm-Object--Oriented-green?style=flat)
@@ -26,7 +26,7 @@
 
 ## Overview
 
-CUST Residencia is a terminal-based management system for a university hostel with two separate wings — **Boys Hostel** and **Girls Hostel** — each with 200 rooms. It simulates real-world hostel operations including student registration, room allocation, fee collection, and administrative record management.
+Hostel Management System is a terminal-based management system with two separate wings — **Boys Hostel** and **Girls Hostel** — each with 200 rooms. It simulates real-world hostel operations including student registration, room allocation, fee collection, and administrative record management.
 
 The project was built as an **Object-Oriented Programming (OOP)** course project at Capital University of Science and Technology (CUST).
 
@@ -152,7 +152,6 @@ hostel_management.exe
 
 ```
 ==============================
-      CUST Residencia
    Hostel Management System
 ==============================
 1. Register — Boys Hostel
@@ -174,7 +173,7 @@ q. Quit
 
 ### Admin Login
 
-- **Username:** `tahir`
+- **Username:** `admin`
 - **Password:** `1234`
 
 From the admin panel you can view room availability, browse all residents, and edit resident details by registration number.
@@ -182,8 +181,6 @@ From the admin panel you can view room availability, browse all residents, and e
 ---
 
 ## Screenshots
-
-> *Add screenshots here after running the program.*
 
 ### Main Menu
 ![Main Menu](screenshots/01_main_menu.png)
@@ -229,10 +226,10 @@ From the admin panel you can view room availability, browse all residents, and e
 BSE233094 | Department of Software Engineering
 Capital University of Science and Technology (CUST), Islamabad
 
-- 📧 [Your Email]
-- 💼 [LinkedIn Profile]
-- 🐙 [GitHub Profile]
+- 📧 mansoorshakeel196@gmail.com
+- 💼 www.linkedin.com/in/mmansoorurrehman
+- 🐙 https://github.com/imnxr
 
 ---
 
-> *Project submitted for Object-Oriented Programming (OOP) course — CUST*
+
