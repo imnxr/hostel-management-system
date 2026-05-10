@@ -183,16 +183,16 @@ From the admin panel you can view room availability, browse all residents, and e
 ## Screenshots
 
 ### Main Menu
-![Main Menu](screenshots/01_main_menu.png)
+![Main Menu](screentshots/01_main_menu.png)
 
 ### Student Registration
-![Registration](screenshots/02_registration.png)
+![Registration](screentshots/02_registration.png)
 
 ### Payment Receipt
-![Receipt](screenshots/03_receipt.png)
+![Receipt](screentshots/03_receipt.png)
 
 ### Admin Panel
-![Admin Panel](screenshots/04_admin_panel.png)
+![Admin Panel](screentshots/04_admin_panel.png)
 
 ---
 
